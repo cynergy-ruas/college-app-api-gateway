@@ -5,14 +5,16 @@ import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFac
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import io.github.cynergy.apigateway.services.FirebaseService;
+
 @Component
 public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthGatewayFilterFactory.Config> {
-    public static class Config {
-        String secretKey;
+    FirebaseService service;
 
-        public Config(String secretKey) {
-            this.secretKey = secretKey;
-        }
+    public static class Config {}
+
+    public AuthGatewayFilterFactory(FirebaseService service) {
+        this.service = service;
     }
 
     @Override

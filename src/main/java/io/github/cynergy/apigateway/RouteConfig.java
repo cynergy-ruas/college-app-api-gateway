@@ -35,9 +35,6 @@ public class RouteConfig {
     @Value("${authservice.prefix}")
     String authServicePrefix;
 
-    @Value("${app.secretkey}")
-    String secretKey;
-
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder, AuthGatewayFilterFactory authFilter) {
         return builder.routes()
@@ -45,7 +42,7 @@ public class RouteConfig {
             .route(p -> p
                 .path(messageServicePrefix)
                 .filters(f -> f
-                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config(secretKey)))
+                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config()))
                     .rewritePath(messageServicePrefix + "(?<segment>/?.*)", "${segment}"))
                 .uri(messageServiceURI))
 
@@ -53,7 +50,7 @@ public class RouteConfig {
             .route(p -> p
                 .path(channelServicePrefix)
                 .filters(f -> f
-                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config(secretKey)))
+                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config()))
                     .rewritePath(channelServicePrefix + "(?<segment>/?.*)", "${segment}"))
                 .uri(channelServiceURI))
 
@@ -61,7 +58,7 @@ public class RouteConfig {
             .route(p -> p
                 .path(userServicePrefix)
                 .filters(f -> f
-                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config(secretKey)))
+                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config()))
                     .rewritePath(userServicePrefix + "(?<segment>/?.*)", "${segment}"))
                 .uri(userServiceURI))
 
