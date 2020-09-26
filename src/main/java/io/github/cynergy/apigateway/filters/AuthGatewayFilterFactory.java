@@ -21,6 +21,7 @@ public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthG
     @SuppressWarnings("unused")
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
+            // :TODO: add verification code
             System.out.print("yayaya");
 
             if (true) {
