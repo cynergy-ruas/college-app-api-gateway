@@ -15,6 +15,24 @@ $ ./gradlew bootRun
 
 fill the `application.properties` file with the URIs of the other microservices.
 
+## Production
+
+To make a docker image, first build the application by using
+```
+$ ./gradlew build
+$ mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
+```
+
+then create the docker image by running
+```
+$ docker build -t apigateway:0.0.1 .
+```
+
+The image can be run by
+```
+$ docker run -p 8080:8080 apigateway:0.0.1
+```
+
 ## Future improvements
 
 1. Use Eureka for service discovery
