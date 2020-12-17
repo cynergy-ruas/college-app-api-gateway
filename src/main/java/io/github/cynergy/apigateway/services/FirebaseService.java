@@ -28,7 +28,7 @@ public class FirebaseService {
             FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken, true);
 
             // return the results of the verification
-            return new VerificationResult(true, decodedToken.getUid());
+            return new VerificationResult(true, decodedToken.getUid(), decodedToken.getClaims());
         } catch (FirebaseAuthException e) {
 
             // return false if token is invalid
@@ -38,27 +38,5 @@ public class FirebaseService {
             // return false
             return new VerificationResult(false);
         }
-    }
-}
-
-class VerificationResult {
-    boolean valid;
-    String uid;
-
-    VerificationResult(boolean valid) {
-        this.valid = valid;
-    }
-
-    VerificationResult(boolean valid, String uid) {
-        this(valid);
-        this.uid = uid;
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public String getUid() {
-        return uid;
     }
 }

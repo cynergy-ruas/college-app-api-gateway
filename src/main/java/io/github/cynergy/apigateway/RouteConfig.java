@@ -42,31 +42,26 @@ public class RouteConfig {
             .route(p -> p
                 .path(messageServicePrefix) // match the path with the message service prefix
                 .filters(f -> f
-                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config())) // validate the token
-                    .rewritePath(messageServicePrefix + "(?<segment>/?.*)", "${segment}")) // remove the message service prefix from the path
+                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config()))) // validate the token
                 .uri(messageServiceURI)) // send the request to message service
 
             // route for channel service
             .route(p -> p
                 .path(channelServicePrefix) // match the path with the channel service prefix
                 .filters(f -> f
-                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config())) // validate the token
-                    .rewritePath(channelServicePrefix + "(?<segment>/?.*)", "${segment}")) // remove the channel service prefix from the path
+                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config()))) // validate the token
                 .uri(channelServiceURI)) // send the request to channel service
 
             // route for user service
             .route(p -> p
                 .path(userServicePrefix) // match the path with the user service prefix
                 .filters(f -> f
-                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config())) // validate the token
-                    .rewritePath(userServicePrefix + "(?<segment>/?.*)", "${segment}")) // remove the user service prefix from the path
+                    .filter(authFilter.apply(new AuthGatewayFilterFactory.Config()))) // validate the token
                 .uri(userServiceURI)) // send the request to user service
 
             // route for auth service
             .route(p -> p
                 .path(authServicePrefix) // match the path with the auth service prefix
-                .filters(f -> f
-                    .rewritePath(authServicePrefix + "(?<segment>/?.*)", "${segment}")) // remove the auth service prefix from the path
                 .uri(authServiceURI)) // send the request to auth service
 
             // building gateway routes
