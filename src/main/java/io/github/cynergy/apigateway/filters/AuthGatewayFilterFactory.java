@@ -42,7 +42,7 @@ public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthG
             if (result.isValid()) {
                 // adding the headers
                 ServerHttpRequest modifiedRequest = addRequestHeader(exchange.getRequest(), userIdHeader,
-                        (String) result.getClaims().getOrDefault("user_id", "null"));
+                        result.getUid());
 
                 // passing the modified request to the next filter
                 return chain.filter(exchange.mutate().request(modifiedRequest).build());
