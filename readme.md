@@ -17,15 +17,14 @@ fill the `application.properties` file with the URIs of the other microservices.
 
 ## Production
 
-To make a docker image, first build the application by using
+Create the docker image by running
 ```
-$ ./gradlew build
-$ mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
+./gradlew bootBuildImage --imageName=cynergyruas/ruas-app:api-gateway-0.0.1
 ```
 
-then create the docker image by running
+Make sure you have the `service-account.json` file in the current directory. To create and start a container, run the following command:
 ```
-$ docker build -t apigateway:0.0.1 .
+docker run -p 8080:8080 -v $(pwd)/service-account.json:/workspace/service-account.json -e GOOGLE_APPLICATION_CREDENTIALS=/workspace/service-account.json cynergyruas/ruas-app:api-gateway-0.0.1
 ```
 
 The image can be run by
