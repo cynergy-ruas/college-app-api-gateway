@@ -12,6 +12,7 @@ Make sure you have jdk 11 (preferably adopt openjdk 11) installed. Run the gatew
 ```
 $ GOOGLE_APPLICATION_CREDENTIALS=service-account.json \
   MESSAGE_SERVICE_URI=<uri of message service> \
+  MESSAGE_SERVICE_WEBSOCKET_URI=<websocket endpoint uri> \
   USER_SERVICE_URI=<uri of user service> \
   CHANNEL_SERVICE_URI=<uri of channel service> \
   AUTH_SERVICE_URI=<uri of auth service> \
@@ -32,6 +33,7 @@ Make sure you have the `service-account.json` file in the current directory. To 
 docker run -p 8080:8080 -v $(pwd)/service-account.json:/workspace/service-account.json \
     -e GOOGLE_APPLICATION_CREDENTIALS=/workspace/service-account.json \
     -e MESSAGE_SERVICE_URI=<uri of message service> \
+    -e MESSAGE_SERVICE_WEBSOCKET_URI=<websocket endpoint uri> \
     -e USER_SERVICE_URI=<uri of user service> \
     -e CHANNEL_SERVICE_URI=<uri of channel service> \
     -e AUTH_SERVICE_URI=<uri of auth service> \

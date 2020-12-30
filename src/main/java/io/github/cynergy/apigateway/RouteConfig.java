@@ -17,6 +17,12 @@ public class RouteConfig {
     @Value("${messageservice.prefix}")
     String messageServicePrefix;
 
+    @Value("${messageservice.websocket.uri}")
+    String messageServiceWebSocketURI;
+
+    @Value("${messageservice.websocket.prefix}")
+    String messageServiceWebSocketPrefix;
+
     @Value("${channelservice.uri}")
     String channelServiceURI;
 
@@ -37,8 +43,14 @@ public class RouteConfig {
 
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder, AuthGatewayFilterFactory authFilter) {
+        System.out.println(messageServiceWebSocketPrefix);
         return builder.routes()
-            // route for message service
+            // route for message service websocket connections
+            .route(p -> p
+                .path(messageServiceWebSocketPrefix)
+                .uri(messageServiceWebSocketURI))
+
+            // route for message service http requests
             .route(p -> p
                 .path(messageServicePrefix) // match the path with the message service prefix
                 .filters(f -> f
